@@ -48,7 +48,7 @@ return(
 {/* <Content/> */}
 {/* <Hooks/> */}
  <Routes>
- {/* <Route path="/" element={<Home/>}></Route> */}
+ <Route path="/" element={<Sidebar/>}></Route>
    <Route path="/Shorts" element={<Shorts/>}></Route>
  </Routes>
  {/* <Conexpo/> */}

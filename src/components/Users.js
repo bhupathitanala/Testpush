@@ -3,6 +3,7 @@ import axios from 'axios'
 export const User = () => {
     const [userData, setUserData] = useState([{}])
     const [id, setId] = useState('')
+    const [uid, setUid] = useState('')
     const [name, setName] = useState('')
 
     const handleSubmit = (e)=>{
@@ -11,12 +12,23 @@ export const User = () => {
             name:name,
             roll:id
         };
-        axios.post('http://localhost:3005/users', newUserData)
-        .then((res)=>{
-            alert('Success');
-            setName('');
-            setId("");
-        })
+
+        if(uid!=""){
+            axios.put(`http://localhost:3005/users/${uid}`, newUserData)
+            .then((res)=>{
+                alert('Success');
+                setName('');
+                setId("");
+            })
+        }
+        else{
+            axios.post('http://localhost:3005/users', newUserData)
+            .then((res)=>{
+                alert('Success');
+                setName('');
+                setId("");
+            })
+        }
     }
 
     useEffect(()=>{
@@ -38,9 +50,17 @@ export const User = () => {
         })
     }
     const handleEdit=(user)=>{
-        const {name,id} = user
+        const {name,id,roll} = user
         setName(name)
-        setId(id)
+        setId(roll)
+        setUid(id)
+        
+        const editUserData = {
+            name:name,
+            roll:id
+        };
+
+        
     }
     console.log(userData)
     return(
